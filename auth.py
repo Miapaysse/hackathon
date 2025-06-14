@@ -6,7 +6,7 @@ USUARIOS_FILE = "usuarios_simulados.csv"
 import csv
 import re
 import os
-print("Directorio actual:", os.getcwd())        # Para que los nombres de usuario y contraseñas queden registrados en el archivo csv, el archibo debe estar abierto en la consola
+print("Directorio actual:", os.getcwd())        # Para que los nombres de usuario y contraseñas queden registrados en el archivo csv, el archivo debe estar abierto en la consola
 
 # Funcion que permite agregar nuevo usuario al CSV
 
@@ -27,7 +27,7 @@ def validar_contraseña(password):
         errores.append("La contraseña debe incluir al menos una letra minúscula")
     if not re.search(r"\d", password):
         errores.append("La contraseña debe incluir al menos un número")
-    if not re.search(r"[!@#%^&*_+.;,:/]", password):
+    if not re.search(r"[!@#\$%\^&\*\(\)_\+\.\;,:/<>?\{\}\[\]\\\-]", password):
         errores.append("La contraseña debe incluir al menos un símbolo especial !@%^&*_+.;,:/") # Muestra lo que el sistema considera un "simbolo especial" para mayor claridad
 
     if errores:
@@ -35,12 +35,12 @@ def validar_contraseña(password):
             "Requisitos mínimos de seguridad: " +
             "\n * ".join(errores)                                   # Pone dentro de la variable la lista de errores identificados
         )
-        sugerencia = "\nTe sugerimos que crees una contraseña única. La utilizació de palabras aleatorias tambien fortalece tu contraseña."
+        sugerencia = "\nTe sugerimos que crees una contraseña única. La utilización de palabras aleatorias también fortalece tu contraseña."
         return False, requisitos + sugerencia                       # Imprime los requisitos (lista de errores) y una sugerencia para que la contraseña sea más fuerte
     else:
         return True, "Contraseña válida."
 
-# Carga los usuarios desde usuarios_simulados.csv en un diccionario
+# Cargar los usuarios desde usuarios_simulados.csv en un diccionario
 
 def cargar_usuarios():
     usuarios = {}
@@ -89,8 +89,9 @@ def registrar_usuario():
 # Inicio de sesión
 def iniciar_sesion():
     usuarios = cargar_usuarios()        # Llama a la función cargar_usuarios dentro de la variable usuarios
+    intentos_restantes = 3               # Le doy tres intentos para iniciar sesión.
     
-    while True:
+    while intentos_restantes > 0:
         print("\n=== INICIO DE SESIÓN ===")
         username = input("Nombre de usuario: ").strip() # Ingresa nombre de usuario
         password = input("Contraseña: ").strip()    # Ingresa contraseña
@@ -111,11 +112,13 @@ def iniciar_sesion():
                 #MENU PRINCIPAL
                 return username
             else:
-                print("\nContraseña incorrecta.")
-                reintentar = input("¿Querés volver a intentarlo? (si/no): ").strip().lower()    # En caso de contraseña incorrecta, se le permite al usuario volver a intentar o volver al menú de acceso
+                intentos_restantes -=1
+                print(f"\nContraseña incorrecta. Te quedan {intentos_restantes} intento(s).")
+                reintentar = input("¿Querés volver a intentarlo? (si/no): ").strip().lower()    # En caso de contraseña incorrecta, se le da la opción al usuario de volver a intentar o volver al menú de acceso. 
                 if reintentar == 'no':
                     print("Volviendo al menú de acceso...")
                     return None
 
-
+    print ("Demasiados intentos fallidos. Volviendo al menú de acceso...")         # Cuando se agoten los tres intentos el usuario vuelve automáticamente al menú de acceso.
+    return None
 
