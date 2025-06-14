@@ -1,4 +1,4 @@
-#Importo las librerías que voy a necesitar 
+# Importo las librerías que voy a necesitar 
 import requests 
 import json
 import datetime
@@ -6,6 +6,7 @@ import csv
 from collections import Counter 
 import statistics
 
+# Importo las funciones que voy a usar de otros archivos
 from clima import clima 
 from historial_global import historial_usuario, estadisticas_globales
 from consejo_ia import consejo
@@ -43,9 +44,10 @@ def menu_acceso(): # Vista Menú Principal Pre-Login
 #Armo una función típica de menú igual que la de acceso y defino funcines para cada opción.
 
 def menu_principal(usuario):
-     #Bucle para mostrar el menú principal repetidamente hasta que el usuario decida salir y se rompa el bucle. 
+     # Bucle para mostrar el menú principal repetidamente hasta que el usuario decida salir y se rompa el bucle. 
      while True: 
-        print("\n=== Menú Principal - GuardiánClima ITBA ===")
+        print("\n=== GuardiánClima ITBA ===")
+        print("\n=== Menú Principal ===") 
         print("1. Consultar clima actual.")
         print("2. Ver historial personal.")
         print("3. Estadísticas globales de uso.")
@@ -53,7 +55,7 @@ def menu_principal(usuario):
         print("5. Acerca de GuardiánClima ITBA.")
         print("6. Cerrar Sesión")
 
-        opcion = input("Selecciona una opción: ") #Le pido al usuario que elija una opción del menú que lleva a que se ejecute la fucnióncorrespondiente.
+        opcion = input("Selecciona una opción (1-6): ") # Le pido al usuario que elija una opción del menú que lleva a que se ejecute la función correspondiente.
 
         if opcion == "1":
             clima(usuario)
@@ -66,7 +68,7 @@ def menu_principal(usuario):
         elif opcion == "5":
             mostrar_info()
         elif opcion == "6":
-            print("¡Nos vemos!")
+            print("Gracias por usar GuardiánClima ITBA. ¡Hasta pronto!")
             menu_acceso()
             break
         else:
