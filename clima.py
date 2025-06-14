@@ -1,24 +1,29 @@
-#Importo las librerías que voy a necesitar 
+# Importo las librerías que voy a necesitar 
+
 import requests 
 import json
 import datetime
 import csv
 from collections import Counter 
 import statistics
+from dotenv import load_dotenv
+import os
 
-HISTORIAL_FILE = "historial_global.csv" #Llamo al archivo donde voy a guardar el historial de consultas
-API_KEY = 'faf588bee287e1e62aa3c55abd236220'  #Clave de API de OpenWeatherMap. Tengo que moverla de aca.!!!
+HISTORIAL_FILE = "historial_global.csv"     # Llamo al archivo donde voy a guardar el historial de consultas
+
+load_dotenv()    # Cargo la API KEY desde el archivo .env donde esta segura.
+API_KEY = os.getenv("OWM_API_KEY") # Clave de API de OpenWeatherMap.
 
 
 
-#Función para consultar clima actual y guardar datos en el historial. Manejando los errores posibles. 
+#    Función para consultar clima actual y guardar datos en el historial. Manejando los errores posibles. 
 #Primero creo una función para obtener los datos del clima actual de la ciudad que se vaya a consultar, a través de la API de OpenWeatherMap.
 def clima_actual(ciudad, api_key):
     url = "http://api.openweathermap.org/data/2.5/weather" #Link base de la API de OpenWeatherMap
     #Añado los parámetros para llamar a la API, que estan en la página de la API.
     parametros = {
         "q": ciudad, #Ciudad a consultar
-        "appid": API_KEY, #Clave de la API
+        "appid": api_key, #Clave de la API
         "units": "metric", #Unidades en sistema métrico (Celsius)
         "lang": "es" #Idioma español 
     }
