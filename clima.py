@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 import os
 
 HISTORIAL_FILE = "historial_global.csv"     # Llamo al archivo donde voy a guardar el historial de consultas
+CAMPOS = ["usuario", "ciudad", "fecha", "temperatura", "condicion", "humedad", "viento"]    # Campos de los diccionarios guardados en el historial
 
 load_dotenv()    # Cargo la API KEY desde el archivo .env donde esta segura.
 API_KEY = os.getenv("OWM_API_KEY") # Clave de API de OpenWeatherMap.
@@ -48,7 +49,17 @@ def clima_actual(ciudad, api_key):
     except json.JSONDecodeError:
         print("Error OWM: La respuesta de la API no es JSON válido.")
         return None
-    
+
+    # Función para agregar un registro en el historial
+
+def registrar_datos_historial(registro):
+    archivo_existe = os.path.isfile(HISTORIAL_FILE)
+    with open(HISTORIAL_FILE, "a", newline='', encoding='utf-8') as archivo:    # Guardo los datos consultados en el archivo historial global   
+        writer = csv.DictWriter(archivo, fieldnames=CAMPOS)
+        if not archivo_existe:
+        writer.writeheader()  # Escribe encabezado solo si el archivo es nuevo
+        writer.writerow(registro)
+
     # Creo la función clima que se ejecuta como opción del menú principal.
 
 def clima(usuario): 
@@ -59,7 +70,7 @@ def clima(usuario):
         try: # Buscamos los datos que vamos a mostrarle al usuario en el archivo JSON.
             temperatura = datos_clima_actual["main"]["temp"]                 # Datos de temperatura
             sensacion = datos_clima_actual["main"]["feels_like"]             # Datos de sensación térmica
-            humedad = datos_clima_actual["main"]["humidity"]                 # Datos de humedad en el ambiente
+            humedad_porcentaje = datos_clima_actual["main"]["humidity"]      # Datos de humedad en el ambiente
             descripcion = datos_clima_actual["weather"][0]["description"]    # Descripción del clima, por ejemplo: "cielo despejado", "nublado", etc
             viento = datos_clima_actual["wind"]["speed"]                     # Datos de velocidad del viento 
             viento_kmh = viento * 3.6                                        # Convierto la velocidad a km/h multiplicandola por 3.6, la paso de m/s que es la unidad que devuelve la API a km/h.
@@ -67,19 +78,25 @@ def clima(usuario):
                     # Le muestro la información al usuario.
 
             print(f"\n Clima en {ciudad.capitalize()}:") #Capitalizo el nombre de la ciudad para que se vea mejor.
-            print(f"- Temperatura: {temperatura} °C") #Añado las unidades para que se entiendan los datos, no es lo mismo 20 F que 20 °C
+            print(f"- Temperatura: {temperatura:.2f} °C") #Añado las unidades para que se entiendan los datos, no es lo mismo 20 F que 20 °C
             print(f"- Sensación térmica: {sensacion} °C") 
-            print(f"- Humedad: {humedad}%")
+            print(f"- Humedad: {humedad_porcentaje}%")
             print(f"- Condición: {descripcion.capitalize()}") #Capitalizo la descripción para que se vea mejor.
             print(f"- Viento: {viento_kmh:.2f} km/h") 
 
             fecha_hora = datetime.now().strftime("%Y-%m-%d %H:%M:%S") #Fecha y hora actual en formato YYYY-MM-DD y HH:MM:SS
-            #Pido el nombre de usuario para guardar en el historial.
 
-            with open(HISTORIAL_FILE, "a", newline="") as archivo: #Guardo los datos consultados en el archivo historial global 
-                writer = csv.writer(archivo)
-                writer.writerow([usuario, ciudad, fecha_hora, temperatura, descripcion, humedad, viento_kmh])
+            registro = {        #Creo un diccionario para guardar los registros
+                "usuario": usuario,
+                "ciudad": ciudad,
+                "fecha": fecha_hora,
+                "temperatura": temperatura,
+                "condicion": descripción,
+                "humedad": humedad_porcentaje,
+                "viento": viento_kmh
+            }
+
+            registrar_datos_historial(registro)
             print("Consulta guardada en el historial global.")
         except KeyError:
             print(f"No se pudo procesar correctamente la información del clima para {ciudad}.")
-
