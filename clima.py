@@ -4,8 +4,6 @@ import requests
 import json
 from datetime import datetime
 import csv
-from collections import Counter 
-import statistics
 from dotenv import load_dotenv
 import os
 
