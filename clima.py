@@ -52,7 +52,7 @@ def clima_actual(ciudad, api_key):
     # Creo la función clima que se ejecuta como opción del menú principal.
 
 def clima(usuario): 
-    ciudad = input("Ingrese el nombre de la ciudad a consultar: ")
+    ciudad = input("Ingrese el nombre de la ciudad a consultar: ").strip()
     datos_clima_actual = clima_actual(ciudad, API_KEY)     # Ejecuto la función para obtener los datos del clima actual de la ciudad ingresada.
     
     if datos_clima_actual:
