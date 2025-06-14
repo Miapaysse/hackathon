@@ -1,11 +1,3 @@
-# Importo las librerías que voy a necesitar 
-import requests 
-import json
-import datetime
-import csv
-from collections import Counter 
-import statistics
-
 # Importo las funciones que voy a usar de otros archivos
 from clima import clima 
 from historial_global import historial_usuario, estadisticas_globales
