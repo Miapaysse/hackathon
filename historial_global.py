@@ -1,9 +1,10 @@
 # Importo las librerías que voy a necesitar 
 
+import os
 import csv
 from collections import Counter 
 import statistics
-import os
+
 
 HISTORIAL_FILE = "historial_global.csv"         # Llamo al archivo donde voy a guardar el historial de consultas
 CAMPOS =  ["usuario", "ciudad", "fecha", "temperatura", "condicion", "humedad", "viento"]    # Campos de los diccionarios guardados en el historial
@@ -20,7 +21,7 @@ def cargar_historial():
         with open(HISTORIAL_FILE, mode='r', newline='', encoding='utf-8') as archivo:      # Abrimos el archivo como lector
             lector = csv.DictReader(archivo)
             for fila in lector:
-                if all(campo in fila and fila[campo].strip() for campo in CAMPOS):        # Validación básica de estructura. Permitiendo omitir registros con datos vacíos
+                if all(campo in fila and fila[campo].strip() != "" for campo in CAMPOS):        # Validación básica de estructura. Permitiendo omitir registros con datos vacíos
                     registros.append(fila)
                 else:
                     print(f"Registro con campos faltantes omitido: {fila}")
@@ -34,9 +35,12 @@ def cargar_historial():
 
 # Función para mostrar el historial de un usuario para una ciudad específica
 def historial_usuario(usuario):
-    ciudad_historial = input("Ingrese la ciudad para la cual desea ver su historial: ").strip()
-    registros = cargar_historial()
     
+    while ciudad_historial == "":
+        print("Por favor, ingresa una ciudad válida.")
+        ciudad_historial = input("Ingrese la ciudad para la cual desea ver su historial: ").strip()
+    registros = cargar_historial()
+        
     if not registros:
         print("No hay registros disponibles para consultar.")
         return
@@ -84,10 +88,7 @@ def estadisticas_globales():
     ciudad_mas_consultada = Counter(ciudades).most_common(1)[0][0]
     promedio_temperatura = statistics.mean(temperaturas)
 
-    print("\nEstadísticas Globales:")
+    print("\n=== Estadísticas Globales- Guardián del Clima ITBA ===\n")
     print(f"* Total de consultas: {total_consultas}")
     print(f"* Ciudad más consultada: {ciudad_mas_consultada}")
     print(f"* Temperatura promedio: {promedio_temperatura:.2f} °C")
-           
-
-
