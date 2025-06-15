@@ -82,7 +82,6 @@ Agrega tus claves sin comillas ni espacios extra y con el formato `VARIABLE=valo
 
 ---
 
-
 ## Instalación y ejecución
 
 1. Clonar el repositorio o descargar el código.
@@ -94,6 +93,7 @@ pip install -r requirements.txt
 
 Dentro de la carpeta del programa, ejecutar la aplicación principal:
 python main.py
+``` 
 
 > ⚠️‼️Advertencia de seguridad⚠️
 No implementar en producción sin ajustes de seguridad.
@@ -121,7 +121,7 @@ Este archivo puede abrirse en Excel, Google Sheets u otras herramientas para gen
 - Gráficos de torta: distribución de condiciones climáticas registradas.
 
 
-#Equipo de desarrollo
+# Equipo de desarrollo
 
 Allona, Ema
 Blanco, Malena
