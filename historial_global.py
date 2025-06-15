@@ -6,6 +6,7 @@ import statistics
 import os
 
 HISTORIAL_FILE = "historial_global.csv"         # Llamo al archivo donde voy a guardar el historial de consultas
+CAMPOS =  ["usuario", "ciudad", "fecha", "temperatura", "condicion", "humedad", "viento"]    # Campos de los diccionarios guardados en el historial
 
 # Opcion 2: Ver historial personal. Manejando los errores posibles.
 
@@ -16,7 +17,7 @@ def cargar_historial():
    
     registros = []
     try:   # Utilizamos el try para poder accionar en caso de posible error
-        with open(HISTORIAL_FILE, mode='r' newline='', encoding='utf-8') as archivo:      # Abrimos el archivo como lector
+        with open(HISTORIAL_FILE, mode='r', newline='', encoding='utf-8') as archivo:      # Abrimos el archivo como lector
             lector = csv.DictReader(archivo)
             for fila in lector:
                 if all(campo in fila for campo in CAMPOS):        # Validación básica de estructura
@@ -45,8 +46,7 @@ def historial_usuario(usuario):
     if encontrados:
         print(f"\nHistorial de consultas para {ciudad_historial.capitalize()} del usuario {usuario}")
         for fila in encontrados:
-            print(f"- Fecha: {fila['fecha']}, Temperatura: {float(fila['temperatura']):.2f} °C, 
-            Condición: {fila['condicion'].capitalize()}, Humedad: {fila['humedad']}%, Viento: {float(fila['viento']):.2f} km/h")
+            print(f"- Fecha: {fila['fecha']}, Temperatura: {float(fila['temperatura']):.2f} °C, Condición: {fila['condicion'].capitalize()}, Humedad: {fila['humedad']}%, Viento: {float(fila['viento']):.2f} km/h")
     else:
         print(f"No se encontraron registros para {ciudad_historial} en tu historial.")
 
@@ -62,9 +62,9 @@ def estadisticas_globales():
         return
 
      # Inicializo las variables que voy a usar para almacenar los datos de las estadísticas.
-            total_consultas = 0 
-            ciudades = []             # Lista para almacenar las ciudades consultadas.
-            temperaturas = []         # Lista para almacenar las temperaturas consultadas. 
+    total_consultas = 0 
+    ciudades = []             # Lista para almacenar las ciudades consultadas.
+    temperaturas = []         # Lista para almacenar las temperaturas consultadas. 
 
     for fila in registros:
         try: 
@@ -84,9 +84,10 @@ def estadisticas_globales():
     ciudad_mas_consultada = Counter(ciudades).most_common(1)[0][0]
     promedio_temperatura = statistics.mean(temperaturas)
 
-     print("\nEstadísticas Globales:")
-            print(f"* Total de consultas: {total_consultas}")
-            print(f"* Ciudad más consultada: {ciudad_mas_consultada}")
-            print(f"* Temperatura promedio: {promedio_temperatura:.2f} °C")
+    print("\nEstadísticas Globales:")
+    print(f"* Total de consultas: {total_consultas}")
+    print(f"* Ciudad más consultada: {ciudad_mas_consultada}")
+    print(f"* Temperatura promedio: {promedio_temperatura:.2f} °C")
            
-            
+
+
