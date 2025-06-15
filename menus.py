@@ -14,7 +14,7 @@ def menu_acceso(): # Vista Menú Principal Pre-Login
         print("2. Registrar Nuevo Usuario")
         print("3. Salir")
 
-        opcion = input("Ingrese una opción (1-3):").strip()     # El usuario elige qué acción desea realizar
+        opcion = int(input("Ingrese una opción (1-3):").strip())     # El usuario elige qué acción desea realizar
 
         if opcion == "1":
             usuario_logueado = iniciar_sesion()     # En el caso de que desee iniciar sesión, se llama a la función correspondiente
@@ -48,7 +48,7 @@ def menu_principal(usuario):
         print("5. Acerca de GuardiánClima ITBA.")
         print("6. Cerrar Sesión")
 
-        opcion = input("Selecciona una opción (1-6): ") # Le pido al usuario que elija una opción del menú que lleva a que se ejecute la función correspondiente.
+        opcion = int(input("Selecciona una opción (1-6): ").strip()) # Le pido al usuario que elija una opción del menú que lleva a que se ejecute la función correspondiente.
 
         if opcion == "1":
             clima(usuario)
