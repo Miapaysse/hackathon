@@ -17,18 +17,18 @@ API_KEY = os.getenv("OWM_API_KEY") # Clave de API de OpenWeatherMap.
 
 # Opción 1: Función para consultar clima actual y guardar datos en el historial. Manejando los errores posibles.
 
-    # Primero creo una función para obtener los datos del clima actual de la ciudad que se vaya a consultar, a través de la API de OpenWeatherMap.
+# Primero creo una función para obtener los datos del clima actual de la ciudad que se vaya a consultar, a través de la API de OpenWeatherMap.
 
 def clima_actual(ciudad, api_key):
     url = "http://api.openweathermap.org/data/2.5/weather" #Link base de la API de OpenWeatherMap
     
-    parametros = {     # Añado los parámetros para llamar a la API, que están en la página de la API.
-        "q": ciudad, #Ciudad a consultar
-        "appid": api_key, #Clave de la API
+    parametros = {         # Añado los parámetros para llamar a la API, que están en la página de la API.
+        "q": ciudad,       #Ciudad a consultar
+        "appid": api_key,  #Clave de la API
         "units": "metric", #Unidades en sistema métrico (Celsius)
-        "lang": "es" #Idioma español 
+        "lang": "es"       #Idioma español 
     }
-    print (f"Consultando el clima para {ciudad} a traves de OpenWeatherMap...")    # Mensaje de espera para que el usuario sepa que se está procesando su solicitud.
+    print (f"Consultando el clima para {ciudad.capitalize()} a traves de OpenWeatherMap...")    # Mensaje de espera para que el usuario sepa que se está procesando su solicitud.
     
     try:
         respuesta = requests.get(url, params=parametros, timeout=10)    # Realizo la solicitud con los parámetros definidos.
@@ -39,7 +39,7 @@ def clima_actual(ciudad, api_key):
         if respuesta.status_code == 401:           #  Preparo mensajes de error ante cualquier fallo de la API.
               print (f"Error de autenticación OWM: API KEY inválida.")
         elif respuesta.status_code == 404:
-             print(f"Eror OWM: Ciudad '{ciudad}' no encontrada.")
+             print(f"Eror OWM: Ciudad '{ciudad.capitalize()}' no encontrada.")
         else:
              print(f"Error HTTP OWM: {errh}")
         return None
@@ -109,4 +109,4 @@ def clima(usuario):
             registrar_datos_historial(registro)
             print("Consulta guardada en el historial global.")
         except KeyError:
-            print(f"No se pudo procesar correctamente la información del clima para {ciudad}.")
+            print(f"No se pudo procesar correctamente la información del clima para {ciudad.capitalize()}.")
