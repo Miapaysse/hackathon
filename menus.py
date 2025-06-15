@@ -38,6 +38,7 @@ def menu_acceso(): # Vista Menú Principal Pre-Login
 def menu_principal(usuario):
      # Bucle para mostrar el menú principal repetidamente hasta que el usuario decida salir y se rompa el bucle. 
      while True: 
+        print(f"\n¡Bienvenido/a {usuario} al Menú Principal!")
         print("\n=== GuardiánClima ITBA ===")
         print("\n=== Menú Principal ===") 
         print("1. Consultar clima actual.")
