@@ -101,6 +101,7 @@ def iniciar_sesion():
             opcion = input("¿Deseás registrarte con este nombre? (si/no): ").strip().lower()    # Si el nombre de usuario con el que intenta iniciar sesión no existe, se le ofrece registrarse volviendo al menu de acceso
             if opcion == 'si':
                 registrar_usuario()
+                # MENU PRINCIPAL
                 return username                                                  # Va directamente a la opción de registro
             else:
                 continuar = input("¿Querés intentar iniciar sesión con otro usuario? (si/no): ").strip().lower() # En el caso que se desee iniciar sesión con otro usuario, se lo lleva de nuevo a iniciar sesión, sino lo devuelve al menú de acceso
@@ -110,7 +111,7 @@ def iniciar_sesion():
         else:
             if usuarios[username] == password:
                 print(f"\n¡Bienvenido, {username}! Inicio de sesión exitoso.")      # Si ambos usuario y contraseña son correctos se lo lleva al menú principal
-                #MENU PRINCIPAL
+                # MENU PRINCIPAL
                 return username
             else:
                 intentos_restantes -=1
