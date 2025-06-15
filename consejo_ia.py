@@ -4,8 +4,8 @@
 
 import os
 import csv
-import google.generativeai as genai
 from dotenv import load_dotenv
+import google.generativeai as genai
 
 # Importo la función clima para utilizarla en el código
 from clima import clima
@@ -43,7 +43,7 @@ def obtener_consejo_ia_gemini(api_key_gemini, ciudad, temperatura, condicion_cli
 def obtener_ultima_consulta(usuario):
     try: # Busco en el historial la última consulta 
         with open(HISTORIAL_FILE, newline='', encoding='utf-8') as archivo:
-            lector = csv.Dictreader(archivo)
+            lector = csv.DictReader(archivo)
             consultas = [fila for fila in lector if fila and fila["usuario"].lower() == usuario.lower()]
             if consultas:
                 return consultas[-1]
@@ -60,7 +60,7 @@ def extraer_datos_de_consulta(consulta):
      # Obtengo de la consulta los datos que necesito
     ciudad = consulta["ciudad"]
     temperatura = consulta["temperatura"]
-    condicion = consulta["codicion"]
+    condicion = consulta["condicion"]
     humedad = consulta["humedad"]
     viento = consulta["viento"]
 
@@ -101,8 +101,8 @@ def consejo(usuario):
         case 2:   # Busco consulta en el historial del usuario
             try:
                 with open(HISTORIAL_FILE, newline='', encoding='utf-8') as archivo:
-                    lector = csv.reader(archivo)
-                    consultas = [fila for fila in lector if fila and (fila[0].lower() == usuario.lower()) ]
+                    lector = csv.DictReader(archivo)
+                    consultas = [fila for fila in lector if fila and (fila["usuario"].lower() == usuario.lower()) ]
                     print(f"\nEste es tu historial de consultas:")
                     
                     if not consultas:
@@ -113,7 +113,7 @@ def consejo(usuario):
         
                     for fila in consultas:
                         contador+=1 
-                        print(f"\nConsulta {contador}: Usuario: {fila[0]}, Ciudad:{fila[1]}, Fecha y hora: {fila[2]}, Temperatura: {fila[3]} °C, Condición del clima: {fila[4]}, Humedad: {fila[5]}%, Viento: {float(fila[6]):.2f} km/h")
+                        print(f"\nConsulta {contador}: Usuario: {fila["usuario"]}, Ciudad:{fila["ciudad"]}, Fecha y hora: {fila["fecha"]}, Temperatura: {float(fila["temperatura"]):.2f} °C, Condición del clima: {fila["condicion"]}, Humedad: {fila["humedad"]}%, Viento: {float(fila["viento"]):.2f} km/h")
                     
                     while True:
                         try:
