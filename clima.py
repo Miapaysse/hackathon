@@ -55,12 +55,9 @@ def clima_actual(ciudad, api_key):
     # Función para agregar un registro en el historial
 
 def registrar_datos_historial(registro):
-    archivo_existe = os.path.isfile(HISTORIAL_FILE)
     with open(HISTORIAL_FILE, "a", newline='', encoding='utf-8') as archivo:    # Guardo los datos consultados en el archivo historial global   
         writer = csv.DictWriter(archivo, fieldnames=CAMPOS)
-        if not archivo_existe:
-            writer.writeheader()  # Escribe encabezado solo si el archivo es nuevo
-            writer.writerow(registro)
+        writer.writerow(registro)
 
 
 
