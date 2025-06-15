@@ -27,14 +27,14 @@ NO utilice ninguna contraseña personal en está aplicación.
 GuardiánClima_ITBA/
 │
 ├── main.py
-├── menus.py
-├── auth.py
-├── clima.py    # Donde se encuentran las funciones para obtener el clima
-├── historial_global.py  
-├── consejo_ia.py
-├── acerca_de.py
+├── menus.py        # Donde se encuentran el menú de acceso y el principal.
+├── auth.py         # Donde se encuentra el proceso de registro de usuario, inicio de sesión y validación de contraseñas.
+├── clima.py        # Donde se encuentran las funciones para obtener el clima.
+├── historial_global.py  # Donde se encuentran las funciones para guardar el historial, verlo y obtener las estadísticas globales.
+├── consejo_ia.py   # Donde se encuentra la función para obtener el consejo de IA.
+├── acerca_de.py    # Donde se encuentra la información del programa.
 ├── .env
-├── requirements.txt
+├── requirements.txt  # Paquetes a instalar.
 ├── usuarios_simulados.csv
 └── historial_global.csv
 
@@ -126,7 +126,7 @@ Este archivo puede abrirse en Excel, Google Sheets u otras herramientas para gen
 Allona, Ema;
 Blanco, Malena;
 Chaves Alvarez, Victoria Mia;
-Hitters, Phimtanaya (Zoe);
+Hitters, Phimthananya (Zoe);
 Payssé, Mia.
 
 Tecnología Admisión ITBA - 1C 2025
