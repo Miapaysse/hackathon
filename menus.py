@@ -14,17 +14,17 @@ def menu_acceso(): # Vista Menú Principal Pre-Login
         print("2. Registrar Nuevo Usuario")
         print("3. Salir")
 
-        opcion = int(input("Ingrese una opción (1-3):").strip())     # El usuario elige qué acción desea realizar
+        opcion = int(input("Ingrese una opción (1-3): "))     # El usuario elige qué acción desea realizar
 
-        if opcion == "1":
+        if opcion == 1:
             usuario_logueado = iniciar_sesion()     # En el caso de que desee iniciar sesión, se llama a la función correspondiente
             if usuario_logueado:
                 menu_principal(usuario_logueado)  # Si el inicio de sesión es existoso, se lo lleva al usuario al Menú Principal
-        elif opcion == "2":
+        elif opcion == 2:
             usuario_logueado = registrar_usuario()       # En el caso de que desee registrarse, se llama a la función correspondiente
             if usuario_logueado:
                 menu_principal(usuario_logueado)  # Auto-login tras registro exitoso
-        elif opcion == "3":
+        elif opcion == 3:
             print("Gracias por usar GuardiánClima ITBA. ¡Hasta pronto!")         # En el caso de que desee salir, se cierra el programa
             exit()
         else:
@@ -48,19 +48,19 @@ def menu_principal(usuario):
         print("5. Acerca de GuardiánClima ITBA.")
         print("6. Cerrar Sesión")
 
-        opcion = int(input("Selecciona una opción (1-6): ").strip()) # Le pido al usuario que elija una opción del menú que lleva a que se ejecute la función correspondiente.
+        opcion = int(input("Selecciona una opción (1-6): ")) # Le pido al usuario que elija una opción del menú que lleva a que se ejecute la función correspondiente.
 
-        if opcion == "1":
+        if opcion == 1:
             clima(usuario)
-        elif opcion == "2":
+        elif opcion == 2:
             historial_usuario(usuario)
-        elif opcion == "3":
+        elif opcion == 3:
             estadisticas_globales()
-        elif opcion == "4":
+        elif opcion == 4:
             consejo(usuario)
-        elif opcion == "5":
+        elif opcion == 5:
             mostrar_info()
-        elif opcion == "6":
+        elif opcion == 6:
             print("Gracias por usar GuardiánClima ITBA. ¡Hasta pronto!")
             menu_acceso()
             break
