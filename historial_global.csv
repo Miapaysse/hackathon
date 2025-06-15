@@ -1,12 +1,18 @@
-Mia ,Buenos Aires,2025-06-13 21:30:56,12.49,nubes,94,28.980000000000004
-Mia,Montreal,2025-06-13 22:23:15,15.37,muy nuboso,51,9.251999999999999
+usuario,ciudad,fecha,temperatura,condicion,humedad,viento
+vchaves,buenos aires,2025-06-15 17:31:35,12.75,cielo claro,55,32.18
+vchaves,singapur,2025-06-15 17:29:48,28.96,muy nuboso,78,5.54
+vchaves,montevideo,2025-06-15 17:32:42,11.27,cielo claro,78,9.25
+vchaves,rosario,2025-06-15 17:37:09,13.94,cielo claro,64,14.83
+vchaves,montreal,2025-06-15 17:45:42,24.5,algo de nubes,30,12.96
+Mia,Buenos Aires,2025-06-13 21:30:56,12.49,nubes,94,28.98
+Mia,Montreal,2025-06-13 22:23:15,15.37,muy nuboso,51,9.25
 Lucas,Roma,2025-06-13 22:43:50,16.84,muy nuboso,60,1.62
-Mia,Buenos Aires,2025-06-14 00:35:31,12.47,nubes,94,28.980000000000004
-Mia,Montevideo,2025-06-14 00:51:40,14.73,cielo claro,78,11.124
-Mia,Montevideo,2025-06-14 00:53:00,14.73,cielo claro,78,11.124
-Mia,Buenos Aires,2025-06-14 00:56:40,12.4,nubes,94,28.980000000000004
+Mia,Buenos Aires,2025-06-14 00:35:31,12.47,nubes,94,28.98
+Mia,Montevideo,2025-06-14 00:51:40,14.73,cielo claro,78,11.12
+Mia,Montevideo,2025-06-14 00:53:00,14.73,cielo claro,78,11.12
+Mia,Buenos Aires,2025-06-14 00:56:40,12.4,nubes,94,28.98
 Mia,Montevideo,2025-06-14 01:00:05,14.73,cielo claro,78,11.124
-Lolo,Buenos Aires,2025-06-14 10:24:44,10.8,llovizna ligera,94,28.980000000000004
-LOLA,Buenos Aires,2025-06-14 10:29:34,10.8,llovizna ligera,94,28.980000000000004
-witita,buenos aires,2025-06-14 11:05:11,10.8,llovizna ligera,94,28.980000000000004
-witita,buenos aires,2025-06-14 11:05:53,10.8,llovizna ligera,94,28.980000000000004
+Lolo,Buenos Aires,2025-06-14 10:24:44,10.8,llovizna ligera,94,28.98
+LOLA,Buenos Aires,2025-06-14 10:29:34,10.8,llovizna ligera,94,28.98
+witita,buenos aires,2025-06-14 11:05:11,10.8,llovizna ligera,94,28.98
+witita,buenos aires,2025-06-14 11:05:53,10.8,llovizna ligera,94,28.98
