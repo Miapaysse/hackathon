@@ -21,10 +21,10 @@ def cargar_historial():
         with open(HISTORIAL_FILE, mode='r', newline='', encoding='utf-8') as archivo:      # Abrimos el archivo como lector
             lector = csv.DictReader(archivo)
             for fila in lector:
-                if all(campo in fila and fila[campo].strip() != "" for campo in CAMPOS):        # Validación básica de estructura. Permitiendo omitir registros con datos vacíos
+                if all(campo in fila for campo in CAMPOS):        # Validación básica de estructura. Permitiendo omitir registros con datos vacíos
                     registros.append(fila)
                 else:
-                    print(f"Registro con campos faltantes omitido: {fila}")
+                    print(f"Registro inválido omitido: {fila}")
         return registros
     except Exception as e:
         print(f"Error al intentar leer el historial: {e}")
@@ -35,7 +35,7 @@ def cargar_historial():
 
 # Función para mostrar el historial de un usuario para una ciudad específica
 def historial_usuario(usuario):
-    
+    ciudad_historial == ""
     while ciudad_historial == "":
         print("Por favor, ingresa una ciudad válida.")
         ciudad_historial = input("Ingrese la ciudad para la cual desea ver su historial: ").strip()
@@ -52,7 +52,7 @@ def historial_usuario(usuario):
         for fila in encontrados:
             print(f"- Fecha: {fila['fecha']}, Temperatura: {float(fila['temperatura']):.2f} °C, Condición: {fila['condicion'].capitalize()}, Humedad: {fila['humedad']}%, Viento: {float(fila['viento']):.2f} km/h")
     else:
-        print(f"No se encontraron registros para {ciudad_historial} en tu historial.")
+        print(f"No se encontraron registros para {ciudad_historial.capitalize()} en tu historial.")
 
 
 
@@ -90,5 +90,5 @@ def estadisticas_globales():
 
     print("\n=== Estadísticas Globales- Guardián del Clima ITBA ===\n")
     print(f"* Total de consultas: {total_consultas}")
-    print(f"* Ciudad más consultada: {ciudad_mas_consultada}")
+    print(f"* Ciudad más consultada: {ciudad_mas_consultada.capitalize()}")
     print(f"* Temperatura promedio: {promedio_temperatura:.2f} °C")
