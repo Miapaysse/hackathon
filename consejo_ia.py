@@ -4,25 +4,25 @@
 
 import os
 import csv
-import json
 import google.generativeai as genai
-import requests 
-from collections import Counter 
 from dotenv import load_dotenv
-
 
 # Importo la función clima para utilizarla en el código
 from clima import clima
 
 HISTORIAL_FILE = "historial_global.csv" # Llamo al archivo del historial de consultas
+CAMPOS =  ["usuario", "ciudad", "fecha", "temperatura", "condicion", "humedad", "viento"]    # Campos de los diccionarios guardados en el historial
 
 load_dotenv()
 api_key_gemini = os.getenv("GEMINI_API_KEY") # Clave de API de IA  
 
+
 def obtener_consejo_ia_gemini(api_key_gemini, ciudad, temperatura, condicion_clima, viento, humedad):
-
+    if not api_key_gemini:
+        print("Error: No se encontró la clave de API de Gemini en el archivo .env.")
+        return
+    
     genai.configure(api_key=api_key_gemini)
-
     model = genai.GenerativeModel("models/gemini-1.5-flash")
 
     prompt = (
@@ -37,13 +37,14 @@ def obtener_consejo_ia_gemini(api_key_gemini, ciudad, temperatura, condicion_cli
         print(respuesta.text)
     except Exception as e:
          print(f"Error inesperado al procesar el consejo IA: {e}")
-        
+
+
 
 def obtener_ultima_consulta(usuario):
     try: # Busco en el historial la última consulta 
         with open(HISTORIAL_FILE, newline='', encoding='utf-8') as archivo:
-            lector = csv.reader(archivo)
-            consultas = [fila for fila in lector if fila and fila[0].lower() == usuario.lower()]
+            lector = csv.Dictreader(archivo)
+            consultas = [fila for fila in lector if fila and fila["usuario"].lower() == usuario.lower()]
             if consultas:
                 return consultas[-1]
             else:
@@ -57,13 +58,15 @@ def obtener_ultima_consulta(usuario):
 
 def extraer_datos_de_consulta(consulta):
      # Obtengo de la consulta los datos que necesito
-    ciudad = consulta[1]
-    temperatura = consulta[3]
-    condicion = consulta[4]
-    humedad = consulta[5]
-    viento = consulta[6]
+    ciudad = consulta["ciudad"]
+    temperatura = consulta["temperatura"]
+    condicion = consulta["codicion"]
+    humedad = consulta["humedad"]
+    viento = consulta["viento"]
 
     return ciudad, temperatura, condicion, humedad, viento
+
+
 
 def procesar_consulta_y_obtener_consejo(consulta):
     ciudad, temperatura, condicion, humedad, viento = extraer_datos_de_consulta(consulta)        # Obtengo de la consulta los datos necesarios 
@@ -110,7 +113,7 @@ def consejo(usuario):
         
                     for fila in consultas:
                         contador+=1 
-                        print(f"\nConsulta {contador}: Usuario: {fila[0]}, Ciudad:{fila[1]}, Fecha y hora: {fila[2]}, Temperatura: {fila[3]} °C, Condición del clima: {fila[4]}, Humedad: {fila[5]}%, Viento: {fila[6]} m/s")
+                        print(f"\nConsulta {contador}: Usuario: {fila[0]}, Ciudad:{fila[1]}, Fecha y hora: {fila[2]}, Temperatura: {fila[3]} °C, Condición del clima: {fila[4]}, Humedad: {fila[5]}%, Viento: {float(fila[6]):.2f} km/h")
                     
                     while True:
                         try:
