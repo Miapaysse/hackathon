@@ -123,11 +123,11 @@ Este archivo puede abrirse en Excel, Google Sheets u otras herramientas para gen
 
 # Equipo de desarrollo
 
-Allona, Ema
-Blanco, Malena
-Chaves Alvarez, Victoria
-Hitters, Phimtanaya (Zoe)
-Payssé, Mia
+Allona, Ema;
+Blanco, Malena;
+Chaves Alvarez, Victoria Mia;
+Hitters, Phimtanaya (Zoe);
+Payssé, Mia.
 
 Tecnología Admisión ITBA - 1C 2025
 
