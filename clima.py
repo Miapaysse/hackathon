@@ -52,16 +52,28 @@ def clima_actual(ciudad, api_key):
 
 
 
-    # Función para agregar un registro en el historial
+# Función para agregar un registro en el historial
 
 def registrar_datos_historial(registro):
-    with open(HISTORIAL_FILE, "a", newline='', encoding='utf-8') as archivo:    # Guardo los datos consultados en el archivo historial global   
+
+    archivo_existe = os.path.isfile(HISTORIAL_FILE)
+    header_faltante = True
+
+    if archivo_existe:
+        with open(HISTORIAL_FILE, newline='', encoding='utf-8') as archivo:
+            lector = csv.reader(archivo)
+            primera_linea = next(lector, None)
+            if primera_linea == CAMPOS:
+                header_faltante = False  # El encabezado ya está
+    
+    with open(HISTORIAL_FILE, "a", newline='', encoding='utf-8') as archivo:        # Guardo los datos consultados en el archivo historial global   
         writer = csv.DictWriter(archivo, fieldnames=CAMPOS)
+        if header_faltante:
+            writer.writeheader()
         writer.writerow(registro)
 
 
-
-    # Creo la función clima que se ejecuta como opción del menú principal.
+# Creo la función clima que se ejecuta como opción del menú principal.
 
 def clima(usuario): 
     while True:
@@ -73,7 +85,7 @@ def clima(usuario):
             
     datos_clima_actual = clima_actual(ciudad, API_KEY)     # Ejecuto la función para obtener los datos del clima actual de la ciudad ingresada.
     
-    if datos_clima_actual:
+    if datos_clima_actual is not None:
         try: # Buscamos los datos que vamos a mostrarle al usuario en el archivo JSON.
             temperatura = datos_clima_actual["main"]["temp"]                 # Datos de temperatura
             sensacion = datos_clima_actual["main"]["feels_like"]             # Datos de sensación térmica
@@ -82,7 +94,7 @@ def clima(usuario):
             viento = datos_clima_actual["wind"]["speed"]                     # Datos de velocidad del viento 
             viento_kmh = round(viento * 3.6, 2)                                        # Convierto la velocidad a km/h multiplicandola por 3.6, la paso de m/s que es la unidad que devuelve la API a km/h.
 
-                    # Le muestro la información al usuario.
+            # Le muestro la información al usuario.
 
             print(f"\n Clima en {ciudad.capitalize()}:") #Capitalizo el nombre de la ciudad para que se vea mejor.
             print(f"- Temperatura: {temperatura:.2f} °C") #Añado las unidades para que se entiendan los datos, no es lo mismo 20 F que 20 °C
