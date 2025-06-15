@@ -20,7 +20,7 @@ def cargar_historial():
         with open(HISTORIAL_FILE, mode='r', newline='', encoding='utf-8') as archivo:      # Abrimos el archivo como lector
             lector = csv.DictReader(archivo)
             for fila in lector:
-                if all(campo in fila for campo in CAMPOS):        # Validación básica de estructura
+                if all(campo in fila and fila[campo].strip() for campo in CAMPOS):        # Validación básica de estructura. Permitiendo omitir registros con datos vacíos
                     registros.append(fila)
                 else:
                     print(f"Registro con campos faltantes omitido: {fila}")
