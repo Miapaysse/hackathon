@@ -2,13 +2,14 @@
 
 #Importo las librerías que voy a necesitar 
 
+import os
+import csv
+import json
 import google.generativeai as genai
 import requests 
-import json
-import csv
 from collections import Counter 
 from dotenv import load_dotenv
-import os
+
 
 # Importo la función clima para utilizarla en el código
 from clima import clima
