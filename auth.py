@@ -83,7 +83,7 @@ def registrar_usuario():
             intentar_otra = input("\n¿Quieres intentar con otra contraseña? (si/no): ").strip().lower()     # Si la contraseña no cumple, se le ofrece al usuario intentar con una nueva contraseña luego de notificarle los requisitos de la mimsa
             if intentar_otra == 'no':
                 print("Registro cancelado.")
-                return None
+                return None #esto funciona o deberia poner un break? 
             
 
 # Inicio de sesión
@@ -100,7 +100,7 @@ def iniciar_sesion():
             print(f"\nEl usuario '{username}' no existe.") 
             opcion = input("¿Deseás registrarte con este nombre? (si/no): ").strip().lower()    # Si el nombre de usuario con el que intenta iniciar sesión no existe, se le ofrece registrarse volviendo al menu de acceso
             if opcion == 'si':
-                return None                                                             # Volver al menu de acceso, que ofrecerá registro
+                return None     #en lugar de volver al menu de acceso, podria ir al registro de usuario?                                                         # Volver al menu de acceso, que ofrecerá registro
             else:
                 continuar = input("¿Querés intentar iniciar sesión con otro usuario? (si/no): ").strip().lower() # En el caso que se desee iniciar sesión con otro usuario, se lo lleva de nuevo a iniciar sesión, sino lo devuelve al menú de acceso
                 if continuar == 'no':
@@ -117,7 +117,7 @@ def iniciar_sesion():
                 reintentar = input("¿Querés volver a intentarlo? (si/no): ").strip().lower()    # En caso de contraseña incorrecta, se le da la opción al usuario de volver a intentar o volver al menú de acceso. 
                 if reintentar == 'no':
                     print("Volviendo al menú de acceso...")
-                    return None
+                    return None #probar sj este none funciona.
 
     print ("Demasiados intentos fallidos. Volviendo al menú de acceso...")         # Cuando se agoten los tres intentos el usuario vuelve automáticamente al menú de acceso.
     return None
