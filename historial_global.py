@@ -35,7 +35,7 @@ def cargar_historial():
 
 # Función para mostrar el historial de un usuario para una ciudad específica
 def historial_usuario(usuario):
-    ciudad_historial == ""
+    ciudad_historial = ""
     while ciudad_historial == "":
         print("Por favor, ingresa una ciudad válida.")
         ciudad_historial = input("Ingrese la ciudad para la cual desea ver su historial: ").strip()
