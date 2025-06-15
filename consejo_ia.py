@@ -141,7 +141,7 @@ def consejo(usuario):
         case 3:        
             clima(usuario)    # Llamo a la funcion clima para poder generar una nueva consulta
             ultima_consulta = obtener_ultima_consulta(usuario)    # Busco en el historial la última consulta hecha por el ususario.
-            if not ultima_consulta:
+            if not ultima_consulta: #esto no funciona, hay algun error porque cuando consulto no la guarda y me devuelve la anterior a esa
                 print("No hay consultas registradas aún.")
                 return
             procesar_consulta_y_obtener_consejo(ultima_consulta)
