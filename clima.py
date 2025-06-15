@@ -1,11 +1,11 @@
 # Importo las librerías que voy a necesitar 
 
-import requests 
-import json
-from datetime import datetime
-import csv
-from dotenv import load_dotenv
 import os
+import json
+import csv
+from datetime import datetime
+from dotenv import load_dotenv
+import requests 
 
 HISTORIAL_FILE = "historial_global.csv"     # Llamo al archivo donde voy a guardar el historial de consultas
 CAMPOS = ["usuario", "ciudad", "fecha", "temperatura", "condicion", "humedad", "viento"]    # Campos de los diccionarios guardados en el historial
@@ -50,6 +50,8 @@ def clima_actual(ciudad, api_key):
         print("Error OWM: La respuesta de la API no es JSON válido.")
         return None
 
+
+
     # Función para agregar un registro en el historial
 
 def registrar_datos_historial(registro):
@@ -57,30 +59,38 @@ def registrar_datos_historial(registro):
     with open(HISTORIAL_FILE, "a", newline='', encoding='utf-8') as archivo:    # Guardo los datos consultados en el archivo historial global   
         writer = csv.DictWriter(archivo, fieldnames=CAMPOS)
         if not archivo_existe:
-        writer.writeheader()  # Escribe encabezado solo si el archivo es nuevo
-        writer.writerow(registro)
+            writer.writeheader()  # Escribe encabezado solo si el archivo es nuevo
+            writer.writerow(registro)
+
+
 
     # Creo la función clima que se ejecuta como opción del menú principal.
 
 def clima(usuario): 
-    ciudad = input("Ingrese el nombre de la ciudad a consultar: ").strip()
+    while True:
+        ciudad = input("Ingrese el nombre de la ciudad a consultar: ").strip()
+        if ciudad == "":
+            print("Por favor, ingrese una ciudad válida.")
+        else:
+            break
+            
     datos_clima_actual = clima_actual(ciudad, API_KEY)     # Ejecuto la función para obtener los datos del clima actual de la ciudad ingresada.
     
     if datos_clima_actual:
         try: # Buscamos los datos que vamos a mostrarle al usuario en el archivo JSON.
             temperatura = datos_clima_actual["main"]["temp"]                 # Datos de temperatura
             sensacion = datos_clima_actual["main"]["feels_like"]             # Datos de sensación térmica
-            humedad_porcentaje = datos_clima_actual["main"]["humidity"]      # Datos de humedad en el ambiente
+            humedad = datos_clima_actual["main"]["humidity"]                 # Datos de humedad en el ambiente
             descripcion = datos_clima_actual["weather"][0]["description"]    # Descripción del clima, por ejemplo: "cielo despejado", "nublado", etc
             viento = datos_clima_actual["wind"]["speed"]                     # Datos de velocidad del viento 
-            viento_kmh = viento * 3.6                                        # Convierto la velocidad a km/h multiplicandola por 3.6, la paso de m/s que es la unidad que devuelve la API a km/h.
+            viento_kmh = round(viento * 3.6, 2)                                        # Convierto la velocidad a km/h multiplicandola por 3.6, la paso de m/s que es la unidad que devuelve la API a km/h.
 
                     # Le muestro la información al usuario.
 
             print(f"\n Clima en {ciudad.capitalize()}:") #Capitalizo el nombre de la ciudad para que se vea mejor.
             print(f"- Temperatura: {temperatura:.2f} °C") #Añado las unidades para que se entiendan los datos, no es lo mismo 20 F que 20 °C
             print(f"- Sensación térmica: {sensacion} °C") 
-            print(f"- Humedad: {humedad_porcentaje}%")
+            print(f"- Humedad: {humedad}%")
             print(f"- Condición: {descripcion.capitalize()}") #Capitalizo la descripción para que se vea mejor.
             print(f"- Viento: {viento_kmh:.2f} km/h") 
 
@@ -91,8 +101,8 @@ def clima(usuario):
                 "ciudad": ciudad,
                 "fecha": fecha_hora,
                 "temperatura": temperatura,
-                "condicion": descripción,
-                "humedad": humedad_porcentaje,
+                "condicion": descripcion,
+                "humedad": humedad,
                 "viento": viento_kmh
             }
 
