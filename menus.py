@@ -19,9 +19,11 @@ def menu_acceso(): # Vista Menú Principal Pre-Login
         if opcion == "1":
             usuario_logueado = iniciar_sesion()     # En el caso de que desee iniciar sesión, se llama a la función correspondiente
             if usuario_logueado:
+                print(f"\n¡Bienvenido/a {usuario_logueado} al Menú Principal!")
                 menu_principal(usuario_logueado)  # Si el inicio de sesión es existoso, se lo lleva al usuario al Menú Principal
         elif opcion == "2":
-            usuario_logueado = registrar_usuario()       # En el caso de que desee registrarse, se llama a la función correspondiente
+            usuario_logueado = registrar_usuario() 
+            print(f"\n¡Bienvenido/a {usuario_logueado} al Menú Principal!")      # En el caso de que desee registrarse, se llama a la función correspondiente
             if usuario_logueado:
                 menu_principal(usuario_logueado)  # Auto-login tras registro exitoso
         elif opcion == "3":
@@ -38,7 +40,6 @@ def menu_acceso(): # Vista Menú Principal Pre-Login
 def menu_principal(usuario):
      # Bucle para mostrar el menú principal repetidamente hasta que el usuario decida salir y se rompa el bucle. 
      while True: 
-        print(f"\n¡Bienvenido/a {usuario} al Menú Principal!")
         print("\n=== GuardiánClima ITBA ===")
         print("\n=== Menú Principal ===") 
         print("1. Consultar clima actual.")

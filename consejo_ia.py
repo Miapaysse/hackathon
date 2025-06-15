@@ -119,7 +119,7 @@ def consejo(usuario):
         
                     for fila in consultas:
                         contador+=1 
-                        print(f"\nConsulta {contador}: Usuario: {fila["usuario"]}, Ciudad:{fila["ciudad"]}, Fecha y hora: {fila["fecha"]}, Temperatura: {float(fila["temperatura"]):.2f} °C, Condición del clima: {fila["condicion"]}, Humedad: {fila["humedad"]}%, Viento: {float(fila["viento"]):.2f} km/h")
+                        print(f"\nConsulta {contador}: Usuario: {fila['usuario']}, Ciudad:{fila['ciudad']}, Fecha y hora: {fila['fecha']}, Temperatura: {float(fila['temperatura']):.2f} °C, Condición del clima: {fila['condicion']}, Humedad: {fila['humedad']}%, Viento: {float(fila['viento']):.2f} km/h")
                     
                     while True:
                         try:
