@@ -26,10 +26,16 @@ def obtener_consejo_ia_gemini(api_key_gemini, ciudad, temperatura, condicion_cli
     model = genai.GenerativeModel("models/gemini-1.5-flash")
 
     prompt = (
-        f"Estoy en {ciudad}. La temperatura es de {temperatura}°C, el clima es {condicion_clima}, con un viento de {viento} km/h "
-        f"y una humedad del {humedad}%. ¿Cómo debería vestirme hoy? Respondé de forma breve y práctica."
+        f"Sos un asistente especializado en sugerencias de vestimenta basadas en condiciones climáticas actuales."
+        f"Tu objetivo principal es brindar recomendaciones de ropa para el día, teniendo en cuenta comodidad, funcionalidad y adecuación al clima.\n"
+        f"Información actual: Estoy en {ciudad}. La temperatura es de {temperatura}°C, el clima es {condicion_clima}, con un viento de {viento} km/h "
+        f"y una humedad del {humedad}%."
+        f"\nBrinda una sugerencia práctica y realista de que ropa podría usar una persona hoy en esta ciudad. \n"
+        f"Considera: posibles lluvias, viento fuerte o mucho sol según losa datos informados"
+        f"Incluí sugerencias concretas (por ejemplo: 'llevar paraguas', 'usar abrigo liviamo', etc.\n)"
+        f"Evita respuestas ambiguas o genericas. Responde en pocas oraciones, de manera breve, calra y profesional."
+        f"Recorda que el estilo de redaccion debe ser cordail, directo y útil, sos el mejor asistente en sugerencias de vestimenta.\n"
     )
-
     try:
         print("\nGenerando consejo con IA...")
         respuesta = model.generate_content(prompt)
