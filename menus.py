@@ -18,13 +18,13 @@ def menu_acceso(): # Vista Menú Principal Pre-Login
 
         if opcion == "1":
             usuario_logueado = iniciar_sesion()     # En el caso de que desee iniciar sesión, se llama a la función correspondiente
-            if usuario_logueado:
+            if usuario_logueado is not None:
                 print(f"\n¡Bienvenido/a {usuario_logueado} al Menú Principal!")
                 menu_principal(usuario_logueado)  # Si el inicio de sesión es existoso, se lo lleva al usuario al Menú Principal
         elif opcion == "2":
-            usuario_logueado = registrar_usuario() 
-            print(f"\n¡Bienvenido/a {usuario_logueado} al Menú Principal!")      # En el caso de que desee registrarse, se llama a la función correspondiente
-            if usuario_logueado:
+            usuario_logueado = registrar_usuario()      # En el caso de que desee registrarse, se llama a la función correspondiente
+            if usuario_logueado is not None:
+                print(f"\n¡Bienvenido/a {usuario_logueado} al Menú Principal!") 
                 menu_principal(usuario_logueado)  # Auto-login tras registro exitoso
         elif opcion == "3":
             print("Gracias por usar GuardiánClima ITBA. ¡Hasta pronto!")         # En el caso de que desee salir, se cierra el programa
