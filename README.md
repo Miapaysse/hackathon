@@ -1,7 +1,14 @@
 # 🌦️ GuardiánClima ITBA
 
 Es un proyecto de aplicación de consola desarrollado en el marco educativo del Hackatón de Tecnología ITBA 2025.
-El programa permite consultar el clima actual de cualquier ciudad, guardar registros, visualizar estadísticas globales de uso, y obtener recomendaciones de vestimenta mediante IA.
+El programa permite consultar el clima actual de cualquier ciudad, guardar registros, visualizar estadísticas globales de uso, y obtener recomendaciones de vestimenta mediante IA
+### Equipo de desarrollo
+
+Allona, Ema;
+Blanco, Malena;
+Chaves Alvarez, Victoria Mia;
+Hitters, Phimthananya (Zoe);
+Payssé, Mia.
 
 ---
 
