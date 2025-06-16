@@ -53,7 +53,7 @@ def mostrar_info():
     print("☼ Validación de contraseñas seguras con diferentes criterios.")
     
     print("\nDesarrollado por: Allona, Ema; Blanco, Malena; Chaves Alvarez, Victoria; Hitters, Phimtanaya (Zoe) y Payssé, Mia ")
-    print("Grupo: ")
+    print("Grupo: Las Chicas Superprogramadoras. ")
     
     print("Tecnología Admisión ITBA - 1C 2025")
 
